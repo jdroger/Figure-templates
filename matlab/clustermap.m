@@ -1,26 +1,39 @@
 % Figure: clustered heatmap (clustermap)
 % 
-function clustermap(data, row_label, col_label, cmap)
+function clustermap(data, row_label, col_label, cmap, axopts)
+
+arguments
+    % required: data, row_label, col_label, cmap
+    data                (:,:) double {mustBeNumeric}
+    row_label           (:,1) cell
+    col_label           (:,1) cell
+    cmap                (:,3) double {mustBeNumeric} =  brewermap(31, '*RdBu')
+    % optional (name-value arguments)
+    axopts.FigPosition  (1,4) double {mustBeNumeric} =  [300 200 650 350]
+    axopts.RowPosition  (1,4) double {mustBeNumeric} =  [0.81 0.22 0.08 0.67]
+    axopts.ColPosition  (1,4) double {mustBeNumeric} =  [0.19 0.89 0.62 0.08]
+    axopts.MapPosition  (1,4) double {mustBeNumeric} =  [0.2 0.23 0.6 0.65]
+end
 
 % cluster rows/columns
 tree_rows = linkage(data,   'average',  'euclidean');
 tree_cols = linkage(data.', 'average',  'euclidean');
 
 % plot row dendrogram
-figure("Position", [300 200 650 350]);
-axes("Position", [0.81 0.22 0.08 0.67]);
+figure("Position", axopts.FigPosition);
+axes("Position", rowpos);
 [dend_row, ~, order_row] = dendrogram(tree_rows, 'Orientation', 'right');
 set(dend_row, "Color", "black");
 set(gca, "Visible", "off");
 
 % plot column dendrogram
-axes("Position", [0.19 0.89 0.62 0.08]);
+axes("Position", axopts.ColPosition);
 [dend_col,~,order_col] = dendrogram(tree_cols);
 set(dend_col, "Color", "black");
 set(gca, "Visible", "off");
 
 % plot heatmap (reordered based on clustering)
-axes("Position", [0.2 0.23 0.6 0.65]);
+axes("Position", axopts.MapPosition);
 ax_heatmap = heatmap(data(flip(order_row),  order_col), ...
                         "Colormap",         cmap, ...
                         "XData",            col_label(order_col), ...
