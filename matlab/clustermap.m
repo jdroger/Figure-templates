@@ -7,7 +7,7 @@
 % via HEATMAP. Rows/columns are labeled by row_label and col_label
 % respectively, and colors are specified by cmap.
 % 
-% help CLUSTERMAP displays documentation with links to dependencies
+% HELP CLUSTERMAP displays documentation with links to dependencies
 % 
 % %%%%% Function Arguments %%%%%
 % 
