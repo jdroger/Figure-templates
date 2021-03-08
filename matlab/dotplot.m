@@ -6,8 +6,8 @@ arguments
     % required args
     data                (:,:) double {mustBeNumeric}
     pvals               (:,:) double {mustBeNumeric,mustBeEqualSize(data,pvals)}
-    row_label           (:,1) cell
-    col_label           (:,1) cell
+    row_label           (:,1) cell   {mustBeEqualDim(data,row_label,1)}
+    col_label           (:,1) cell   {mustBeEqualDim(data,col_label,2)}
     % optional args(name-value pairs)
     axopts.Colormap     (:,3) double {mustBeNumeric} =  brewermap(31, '*RdYlBu')
     axopts.FigPosition  (1,4) double {mustBeNumeric} =  [300 200 650 350]
@@ -79,12 +79,21 @@ end
 
 
 
-% Custom validation function
+% Custom validation functions
 function mustBeEqualSize(a,b)
     % Test for equal size
     if ~isequal(size(a),size(b))
         eid = 'Size:notEqual';
         msg = 'Size of first input must equal size of second input.';
+        throwAsCaller(MException(eid,msg))
+    end
+end
+
+function mustBeEqualDim(a,b,dim)
+    % Test for equal length in specified dimension
+    if ~isequal(size(a,dim),size(b))
+        eid = 'Length:notEqual';
+        msg = 'Length of first input dimension must equal length of second input.';
         throwAsCaller(MException(eid,msg))
     end
 end
