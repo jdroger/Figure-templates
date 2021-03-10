@@ -2,7 +2,8 @@
 % 03.05.2020 JR
 % Generates a hierarchically-clustered heatmap from a numeric array.
 % 
-% %%%%% Usage %%%%% CLUSTERMAP(data, row_label, col_label, cmap) performs
+% %%%%% Usage %%%%% 
+% CLUSTERMAP(data, row_label, col_label, cmap) performs
 % hierarchical clustering via LINKAGE and DENDROGRAM and visualizes data
 % via HEATMAP. Rows/columns are labeled by row_label and col_label
 % respectively, and colors are specified by cmap.
