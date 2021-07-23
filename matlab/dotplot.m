@@ -1,5 +1,13 @@
 % Figure: dot plot
+% 03.09.2020 JR
 % 
+% %%%%% Usage %%%%%
+% 
+% %%%%% Function Arguments %%%%%
+% 
+% Required arguments:
+% 
+% Optional arguments: specified as Name-Value pairs
 function dotplot(data, pvals, row_label, col_label, axopts, clustopts)
 
 arguments
