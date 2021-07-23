@@ -6,16 +6,25 @@
 % %%%%% Function Arguments %%%%%
 % 
 % Required arguments:
+% data - m x n array of values (e.g. FC or Pearson rho)
+% pvals - m x n array of p-values
+% row_label - n x 1 cell array of row labels
+% col_label - m x 1 cell array of column labels
 % 
 % Optional arguments: specified as Name-Value pairs
+% 
+% %%%%% Example %%%%%
+% dotplot(data_rho, data_p, data_rowlabels, data_collabels)  % generates
+%   plot with default parameters
+% 
 function dotplot(data, pvals, row_label, col_label, axopts, clustopts)
 
 arguments
     % required args
     data                (:,:) double {mustBeNumeric}
     pvals               (:,:) double {mustBeNumeric,mustBeEqualSize(data,pvals)}
-    row_label           (:,1) cell   {mustBeEqualDim(data,row_label,1)}
-    col_label           (:,1) cell   {mustBeEqualDim(data,col_label,2)}
+    row_label           (:,1) cell   %{mustBeEqualDim(data,row_label,1)}
+    col_label           (:,1) cell   %{mustBeEqualDim(data,col_label,2)}
     % optional args(name-value pairs)
     axopts.Colormap     (:,3) double {mustBeNumeric} =  brewermap(31, '*RdYlBu')
     axopts.FigPosition  (1,4) double {mustBeNumeric} =  [300 200 650 350]
